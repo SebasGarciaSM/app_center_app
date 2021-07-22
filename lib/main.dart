@@ -1,16 +1,17 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:appcenter/appcenter.dart';
-import 'package:appcenter_analytics/appcenter_analytics.dart';
-import 'package:appcenter_crashes/appcenter_crashes.dart';
+import 'package:flutter_appcenter_bundle/flutter_appcenter_bundle.dart';
 
 void main() async{
-  final ios = defaultTargetPlatform == TargetPlatform.iOS;
 
-  var app_secret = ios ? "a89e4afe-ce20-4a8f-a50a-6b33da48f7af" : "311f3b25-c5f2-41da-b17e-7ab4a294dea7";
-  await AppCenter.start(app_secret, [AppCenterAnalytics.id, AppCenterCrashes.id]);
+  WidgetsFlutterBinding.ensureInitialized();
+  await AppCenter.startAsync(
+    appSecretAndroid: '311f3b25-c5f2-41da-b17e-7ab4a294dea7',
+    appSecretIOS: 'a89e4afe-ce20-4a8f-a50a-6b33da48f7af',
+    enableDistribute: false,
+  );
 
-  MyApp();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
